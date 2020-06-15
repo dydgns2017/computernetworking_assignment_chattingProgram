@@ -69,14 +69,24 @@ public class MultipleChatC extends Frame implements ActionListener {
         try {
             if (e.getActionCommand() == "확인" || e.getSource() == clfT1 ){
                 clientName = clfT1.getText();
-                output.write("id:"+clientName + "\r\n");
+                output.write("id@"+clientName + "@\r\n");
                 output.flush();
-                System.out.println("id:"+clientName);
+                System.out.println("id@"+clientName+"@");
                 return;
             }
             clientData = text.getText();
+            // 귓속말
+            if (clientData.substring(0, 2).equals("/r")){
+                String[] temp_data = clientData.split(" ");
+                System.out.println("동작");
+                int exceptLength = temp_data[0].length() + temp_data[1].length() + 2;
+                output.write("private@" + temp_data[1] + "@" + clientData.substring(exceptLength) + "\r\n");
+                output.flush();
+                text.setText("");
+                return;
+            }
             // display.append("\r\n" + clientName + " : " + clientData); 
-            output.write("[allChat]_" + clientName + " : " + clientData + "\r\n");
+            output.write("allChat@" + clientName + "@" + clientData + "\r\n");
             output.flush();
             text.setText("");
         } catch (IOException ae) {
@@ -105,6 +115,9 @@ public class MultipleChatC extends Frame implements ActionListener {
                     this.setVisible(true);
                     continue;
                 }
+                if( serverData.equals("exitConnect")){
+                    System.exit(0);
+                }
                 display.append("\r\n" + serverData);
             }
         } catch (Exception e) {
@@ -120,7 +133,13 @@ public class MultipleChatC extends Frame implements ActionListener {
 
     class WinListener extends WindowAdapter {
         public void windowClosing(WindowEvent e){
-            System.exit(0);
+            try {
+                output.write("exitConnect@.@.\r\n");
+                output.flush();
+            } catch (IOException ioe) {
+                //TODO: handle exception
+                ioe.printStackTrace();
+            }
         }
     }
 }

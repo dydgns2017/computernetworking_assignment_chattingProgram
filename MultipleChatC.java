@@ -19,6 +19,11 @@ public class MultipleChatC extends Frame implements ActionListener {
     TextField clfT1;
     Label clfL2;
 
+    public static void main(String[] args) {
+        MultipleChatC c = new MultipleChatC();
+        c.runClient();
+    }
+
     public MultipleChatC() {
         // 채팅창 UI
         super("클라이언트");
@@ -124,11 +129,6 @@ public class MultipleChatC extends Frame implements ActionListener {
             //TODO: handle exception
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        MultipleChatC c = new MultipleChatC();
-        c.runClient();
     }
 
     class WinListener extends WindowAdapter {

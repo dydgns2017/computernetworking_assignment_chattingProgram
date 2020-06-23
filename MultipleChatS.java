@@ -14,6 +14,11 @@ public class MultipleChatS extends Frame {
 
     public ServerThread SThread;
 
+    public static void main(String[] args) {
+        MultipleChatS s = new MultipleChatS();
+        s.runServer();
+    }
+
     public MultipleChatS(){
         super("¼­¹ö");
         info = new Label();
@@ -47,10 +52,6 @@ public class MultipleChatS extends Frame {
         } catch (IOException e){
             e.printStackTrace();
         }
-    }
-    public static void main(String[] args) {
-        MultipleChatS s = new MultipleChatS();
-        s.runServer();
     }
 
     class WinListener extends WindowAdapter {

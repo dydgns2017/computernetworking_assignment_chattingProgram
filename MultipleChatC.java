@@ -97,7 +97,7 @@ public class MultipleChatC extends Frame implements ActionListener {
 
     public void runClient(){
         try {
-            client = new Socket(InetAddress.getLocalHost(), 5000);
+            client = new Socket("192.168.0.4", 5000);
             input = new BufferedReader(new InputStreamReader(client.getInputStream()));
             output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             while(true){
